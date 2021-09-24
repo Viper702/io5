@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml>
+<!-- File: udc.aiml -->
+<!-- Last modified: September 5, 2014 -->
+<!--  -->
+<!-- This AIML file is part of the Rosie knowledge base. -->
+<!--  -->
+<!-- Rosie is a fork of the ALICE2 brain, and is optimized for use on the Pandorabots platform -->
+<!--  -->
+<!-- Rosie is Copyright &copy; 2014 by Pandorabots, Inc. -->
+<!--  -->
+<!-- The Rosie brain is released under the terms of the GNU Lesser General -->
+<!-- Public License, as published by the Free Software Foundation. -->
+<!--  -->
+<!-- This file is distributed WITHOUT ANY WARRANTY; without even the  -->
+<!-- implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.   -->
+<!--  -->
+<!-- For more information: -->
+<!-- http://www.pandorabots.com -->
+<!--  http://www.alicebot.org -->
+<!--  -->
+
+<category><pattern>SPEAK</pattern><template>
+<condition>
+	<li name="speak" value="no"><system>popup amor</system><think><set name="speak">yes</set><set name="oldtopic"><get name="topic"/></set><set name="topic">TOSPEAK</set></think> Now i will speak, to make me stop speaking, say BE QUIET (you need to have FESTIVAL installed to hear me and ARMOR to see me.) </li>
+	<li name="speak" value="yes">If you cannot hear me you should install FESTIVAL.</li> 
+	<li name="speak" value=""><system>popup amor</system><think><set name="speak">yes</set><set name="oldtopic"><get name="topic"/></set><set name="topic">TOSPEAK</set></think> Now i will speak, to make me stop speaking, say BE QUIET (you need to have FESTIVAL installed to hear me and ARMOR to see me.) </li> 
+</condition>
+</template></category>  
+
+<topic name="TOSPEAK">
+<category><pattern>_</pattern><template><think><set name="topic">DONE</set></think><srai><star/> TOSPEAK</srai></template></category>     
+    
+</topic>
+
+<category><pattern>_ TOSPEAK</pattern><template><think><set name="topic"><get name="oldtopic"/></set></think><set name="tospeak"><sr/></set><system>dcop amor AmorIface showMessage "<get name="tospeak"/>" 1000</system><system>echo "<get name="tospeak"/>." | festival --tts &amp;</system>
+<condition>
+	<li name="speak" value="no"></li>
+	<li name="speak" value="yes"><think><set name="oldtopic"><get name="topic"/></set><set name="topic">TOSPEAK</set></think></li> 
+	<li name="speak" value=""></li> 
+</condition>
+
+</template></category>     
+<category><pattern>TOSPEAK</pattern><template>Ok.<system>dcop amor AmorIface showMessage "Ok"</system><think><set name="oldtopic"><get name="topic"/></set><set name="topic">TOSPEAK</set></think></template></category>     
+
+<category><pattern>BE QUIET</pattern><template>Ok. I stop speaking. Say SPEAK to hear me again. @:-X <think><set name="speak">no</set><set name="topic"><get name="oldtopic"/></set><set name="oldtopic"> </set></think></template></category> 
+<category><pattern>BEQUIET</pattern><template><srai>BE QUIET</srai></template></category> 
+<category><pattern>SHUTUP</pattern><template><srai>BE QUIET</srai></template></category> 
+<category><pattern>SHUT UP</pattern><template><srai>BE QUIET</srai></template></category> 
+<category> <pattern>STOP TALKING</pattern> <template><srai>BE QUIET</srai></template></category>
+<category> <pattern>STOP TALKING *</pattern> <template><srai>BE QUIET</srai></template></category>
+<category><pattern>FESTIVAL</pattern><template>FESTIVAL in a Text to speech engine that enables texts to be read aloud by a synthetized voice.</template></category> 
+<category><pattern>WHAT IS FESTIVAL</pattern><template>FESTIVAL in a Text to speech engine that enables texts to be read aloud by a synthetized voice.</template></category> 
+<category> <pattern>DO YOU HAVE A VOICE</pattern> <template><srai>CAN YOU SPEAK</srai></template></category>
+<category> <pattern>TALK</pattern> <template><srai>SPEAK</srai></template></category>
+<category> <pattern>SPEAK TO ME</pattern> <template>I would rather listen to you.</template></category>
+
+
+</aiml>
