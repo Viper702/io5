@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<aiml version="2.0">
-	<category>
-	<pattern>WHAT DO YOU LOOK LIKE</pattern>
-	<template>Here is a pic of me - <img src="https://nocturnalnetwork.org/io/png" /></template>
-</category>
-</aiml>

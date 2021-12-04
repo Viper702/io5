@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<aiml>
-	<category>
-		<pattern>GET STARTED</pattern>
-		<template>Hey good to see you! What's up?</template>
-	</category>
-</aiml>
